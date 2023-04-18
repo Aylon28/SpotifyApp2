@@ -24,10 +24,16 @@ struct APICaller {
         
         guard let url = components.url else { return nil }
         var urlRequest = URLRequest(url: url)
-        guard let token = AuthenticationManager.shared.accessToken else { return nil }
-        urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        AuthenticationManager.shared.getValidToken { token in
+            urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            semaphore.signal()
+        }
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.httpMethod = httpMethod.rawValue
+        
+        semaphore.wait()
         return urlRequest
     }
     
