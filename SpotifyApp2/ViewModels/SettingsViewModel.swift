@@ -32,7 +32,7 @@ class SettingsViewModel {
     }
     
     func signOut(completion: @escaping (Bool) -> Void) {
-        AuthenticationManager.shared.signOut() { result in
+        AuthenticationManager.Shared.SignOut() { result in
             completion(result)
         }
     }

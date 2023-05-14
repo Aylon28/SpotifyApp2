@@ -21,6 +21,7 @@ class SubtitleTableViewCell: UITableViewCell {
         imageView.image = UIImage(systemName: "house")
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -29,6 +30,7 @@ class SubtitleTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 16)
         label.textColor = .label
         label.numberOfLines = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -37,6 +39,7 @@ class SubtitleTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 12)
         label.textColor = .secondaryLabel
         label.numberOfLines = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -54,22 +57,32 @@ class SubtitleTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        coverImageView.frame = CGRect(x: 5, y: 5, width: contentView.height-10, height: contentView.height-10)
-        titleLabel.frame = CGRect(x: coverImageView.right+10,
-                                  y: 0,
-                                  width: contentView.width-coverImageView.width-20,
-                                  height: contentView.height/2)
-        subtitleLabel.frame = CGRect(x: coverImageView.right+10,
-                                     y: contentView.height/2,
-                                     width: contentView.width-coverImageView.width-20,
-                                     height: contentView.height/2)
+        setAnchors()
     }
    
     func configure(viewModel: SubtitleTableViewCellViewModel) {
         titleLabel.text = viewModel.title
         subtitleLabel.text = viewModel.subtitle
         coverImageView.sd_setImage(with: viewModel.coverImageURL)
+    }
+    
+    private func setAnchors() {
+        NSLayoutConstraint.activate([
+            coverImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            coverImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
+            coverImageView.widthAnchor.constraint(equalToConstant: contentView.height-10),
+            coverImageView.heightAnchor.constraint(equalToConstant: contentView.height-10),
+            
+            titleLabel.leadingAnchor.constraint(equalTo: coverImageView.trailingAnchor, constant: 10),
+            titleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -10),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            titleLabel.bottomAnchor.constraint(equalTo: contentView.centerYAnchor),
+            
+            subtitleLabel.leadingAnchor.constraint(equalTo: coverImageView.trailingAnchor, constant: 10),
+            subtitleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -10),
+            subtitleLabel.topAnchor.constraint(equalTo: contentView.centerYAnchor),
+            subtitleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
     }
 
 }

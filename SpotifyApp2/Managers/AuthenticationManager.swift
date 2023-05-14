@@ -8,9 +8,9 @@
 import Foundation
 
 struct AuthenticationManager {
-    static let shared = AuthenticationManager()
+    static let Shared = AuthenticationManager()
     
-    struct Constants {
+    private struct Constants {
         static let authHost = "accounts.spotify.com"
         static let clientID = "e22e9b9dede74131843b7b4b8113f32e"
         static let clientSecret = "21540e2b94294aa5b8c1b0647eafdc63"
@@ -24,44 +24,44 @@ struct AuthenticationManager {
         }
     }
     
-    var accessToken: String? {
+    var AccessToken: String? {
         return UserDefaults.standard.string(forKey: Constants.UserDefaultsKeys.accessToken.rawValue)
     }
     
-    var refreshToken: String? {
+    var RefreshToken: String? {
         return UserDefaults.standard.string(forKey: Constants.UserDefaultsKeys.refreshToken.rawValue)
     }
     
-    var tokenExpirationDate: Date? {
+    var TokenExpirationDate: Date? {
         return UserDefaults.standard.object(forKey: Constants.UserDefaultsKeys.expireDate.rawValue) as? Date
     }
     
-    var isSignedIn: Bool {
-        return accessToken != nil
+    var IsSignedIn: Bool {
+        return AccessToken != nil
     }
     
-    var shouldRefreshToken: Bool {
-        guard let expirationDate = tokenExpirationDate else { return false }
+    var ShouldRefreshToken: Bool {
+        guard let expirationDate = TokenExpirationDate else { return false }
         let currentDate = Date()
         let bufferTime: TimeInterval = 500
         return expirationDate <= currentDate.addingTimeInterval(bufferTime)
     }
     
-    func getValidToken(completion: @escaping (String) -> Void) {
-        if shouldRefreshToken {
-            refreshToken { result in
+    func GetValidToken(completion: @escaping (String) -> Void) {
+        if ShouldRefreshToken {
+            RefreshToken { result in
                 if result {
-                    guard let token = accessToken else { return }
+                    guard let token = AccessToken else { return }
                     completion(token)
                 }
             }
         } else {
-            guard let token = accessToken else { return }
+            guard let token = AccessToken else { return }
             completion(token)
         }
     }
     
-    private func getURLFromComponents(path: String, queryItems: [URLQueryItem]) -> URL? {
+    private func GetURLFromComponents(path: String, queryItems: [URLQueryItem]) -> URL? {
         var components = URLComponents()
         components.scheme = "https"
         components.host = Constants.authHost
@@ -71,19 +71,19 @@ struct AuthenticationManager {
         return components.url
     }
     
-    func getAccessCodeURL() -> URLRequest? {
+    func GetAccessCodeURL() -> URLRequest? {
         let queryItems = [
             URLQueryItem(name: "response_type", value: "code"),
             URLQueryItem(name: "client_id", value: Constants.clientID),
             URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
             URLQueryItem(name: "scope", value: Constants.scope)
         ]
-        guard let url = getURLFromComponents(path: "/authorize", queryItems: queryItems) else { return nil }
+        guard let url = GetURLFromComponents(path: "/authorize", queryItems: queryItems) else { return nil }
         return URLRequest(url: url)
     }
     
-    private func performTaskForAccessToken(queryItems: [URLQueryItem], completion: @escaping (Bool) -> Void) {
-        guard let url = getURLFromComponents(path: "/api/token", queryItems: queryItems) else { return }
+    private func PerformTaskForAccessToken(queryItems: [URLQueryItem], completion: @escaping (Bool) -> Void) {
+        guard let url = GetURLFromComponents(path: "/api/token", queryItems: queryItems) else { return }
         
         var urlRequest = URLRequest(url: url)
         let toBase64String = "\(Constants.clientID):\(Constants.clientSecret)".toBase64()
@@ -99,7 +99,7 @@ struct AuthenticationManager {
             }
             do {
                 let result = try JSONDecoder().decode(AuthenticationResponse.self, from: data)
-                saveAuthResponse(result)
+                SaveAuthResponse(result)
                 completion(true)
             } catch {
                 completion(false)
@@ -108,33 +108,33 @@ struct AuthenticationManager {
         task.resume()
     }
     
-    func changeCodeForToken(code: String, completion: @escaping (Bool) -> Void) {
+    func ChangeCodeForToken(code: String, completion: @escaping (Bool) -> Void) {
         let queryItems = [
             URLQueryItem(name: "code", value: code),
             URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
             URLQueryItem(name: "grant_type", value: "authorization_code")
         ]
         
-        performTaskForAccessToken(queryItems: queryItems) { result in
+        PerformTaskForAccessToken(queryItems: queryItems) { result in
             completion(result)
         }
     }
     
-    func refreshToken(completion: ((Bool) -> Void)?) {
-        if shouldRefreshToken {
-            guard let refreshToken = refreshToken else { return }
+    func RefreshToken(completion: ((Bool) -> Void)?) {
+        if ShouldRefreshToken {
+            guard let refreshToken = RefreshToken else { return }
             let queryItems = [
                 URLQueryItem(name: "refresh_token", value: refreshToken),
                 URLQueryItem(name: "grant_type", value: "refresh_token")
             ]
             
-            performTaskForAccessToken(queryItems: queryItems) { result in
+            PerformTaskForAccessToken(queryItems: queryItems) { result in
                 completion?(result)
             }
         }
     }
     
-    func saveAuthResponse(_ authInfo: AuthenticationResponse) {
+    func SaveAuthResponse(_ authInfo: AuthenticationResponse) {
         UserDefaults.standard.setValue(authInfo.access_token, forKey: Constants.UserDefaultsKeys.accessToken.rawValue)
         if authInfo.refresh_token != nil {
             UserDefaults.standard.setValue(authInfo.refresh_token, forKey: Constants.UserDefaultsKeys.refreshToken.rawValue)
@@ -143,7 +143,7 @@ struct AuthenticationManager {
         UserDefaults.standard.setValue(expireDate, forKey: Constants.UserDefaultsKeys.expireDate.rawValue)
     }
     
-    func signOut(completion: @escaping (Bool) -> Void) {
+    func SignOut(completion: @escaping (Bool) -> Void) {
         UserDefaults.standard.setValue(nil, forKey: Constants.UserDefaultsKeys.accessToken.rawValue)
         UserDefaults.standard.setValue(nil, forKey: Constants.UserDefaultsKeys.refreshToken.rawValue)
         UserDefaults.standard.setValue(nil, forKey: Constants.UserDefaultsKeys.expireDate.rawValue)

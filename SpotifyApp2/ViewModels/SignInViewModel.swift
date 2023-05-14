@@ -10,6 +10,6 @@ import Foundation
 class SignInViewModel {
     
     var isSignedIn: Bool {
-        return AuthenticationManager.shared.isSignedIn
+        return AuthenticationManager.Shared.IsSignedIn
     }
 }

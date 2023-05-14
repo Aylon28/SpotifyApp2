@@ -64,15 +64,15 @@ class LibraryViewModel {
     }
     
     func createPlaylistTapped(_ playlistName: String) {
-        APICaller.shared.getUserProfile { [weak self] result in
+        APICallerUser.Shared.GetUserProfile { [weak self] result in
             switch result {
             case .success(let userProfile):
-                APICaller.shared.createPlaylistWith(playlistName, userID: userProfile.id) { result in
+                APICallerPlaylists.Shared.CreatePlaylistWith(playlistName, userID: userProfile.id) { result in
                     if result {
-                        HapticsManager.shared.vibrate(for: .success)
+                        HapticsManager.Shared.Vibrate(for: .success)
                         self?.fetchPlaylists()
                     } else {
-                        HapticsManager.shared.vibrate(for: .error)
+                        HapticsManager.Shared.Vibrate(for: .error)
                     }
                 }
             case .failure(let error):
@@ -88,7 +88,7 @@ class LibraryViewModel {
     }
     
     func fetchAlbums() {
-        APICaller.shared.getUsersAlbums { [weak self] result in
+        APICallerAlbums.Shared.GetUsersAlbums { [weak self] result in
             switch result {
             case .success(let albumsResponse):
                 var albums = [Album]()
@@ -103,10 +103,10 @@ class LibraryViewModel {
     }
     
     func fetchPlaylists() {
-        APICaller.shared.getUserProfile { result in
-            switch result {
+        APICallerUser.Shared.GetUserProfile { profileResult in
+            switch profileResult {
             case .success(let userProfile):
-                APICaller.shared.getUsersPlaylists { [unowned self] result in
+                APICallerPlaylists.Shared.GetUsersPlaylists { [unowned self] result in
                     switch result {
                     case .success(let playlistsResponse):
                         if self.playlistsAreOwnedByUser {
@@ -125,7 +125,7 @@ class LibraryViewModel {
     }
     
     func fetchArtists() {
-        APICaller.shared.getUsersFollowedArtists { [weak self] result in
+        APICallerArtists.Shared.GetUsersFollowedArtists { [weak self] result in
             switch result {
             case .success(let followingResponse):
                 self?.artists.value = followingResponse.artists.items

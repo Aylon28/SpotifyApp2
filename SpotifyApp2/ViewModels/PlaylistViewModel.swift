@@ -47,7 +47,7 @@ class PlaylistViewModel {
     
     func fetchPlaylistData() {
         guard let id = playlist?.id else { return }
-        APICaller.shared.getPlaylistInfoById(id) { [weak self] result in
+        APICallerPlaylists.Shared.GetPlaylistInfoById(id) { [weak self] result in
             switch result {
             case .success(let playlistDetails):
                 self?.playlistDetails.value = playlistDetails
@@ -68,18 +68,18 @@ class PlaylistViewModel {
     
     func addButtonTapped() {
         guard let id = playlist?.id else { return }
-        APICaller.shared.manipulatePlaylist(id, method: .PUT) { result in
+        APICallerPlaylists.Shared.ManipulatePlaylist(id, method: .PUT) { result in
             if result {
-                HapticsManager.shared.vibrate(for: .success)
+                HapticsManager.Shared.Vibrate(for: .success)
             }
         }
     }
     
     func removeButtonTapped(completion: @escaping (Bool) -> Void) {
         guard let id = playlist?.id else { return }
-        APICaller.shared.manipulatePlaylist(id, method: .DELETE) { result in
+        APICallerPlaylists.Shared.ManipulatePlaylist(id, method: .DELETE) { result in
             if result {
-                HapticsManager.shared.vibrate(for: .success)
+                HapticsManager.Shared.Vibrate(for: .success)
             }
             completion(result)
         }

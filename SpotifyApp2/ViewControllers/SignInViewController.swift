@@ -15,6 +15,7 @@ class SignInViewController: UIViewController {
         label.text = "Spotify"
         label.font = .systemFont(ofSize: 50, weight: .bold)
         label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -26,6 +27,7 @@ class SignInViewController: UIViewController {
         button.backgroundColor = .black
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -42,9 +44,7 @@ class SignInViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        appNameLabel.frame = CGRect(x: 20, y: view.safeAreaInsets.top+100, width: view.width-20, height: 70)
-        signInButton.frame = CGRect(x: 20, y: view.bottom-150, width: view.width-40, height: 60)
+        setAnchors()
     }
     
     private func showTabBarView() {
@@ -85,7 +85,15 @@ class SignInViewController: UIViewController {
             present(alertController, animated: true)
         }
     }
-
-
+    
+    private func setAnchors() {
+        NSLayoutConstraint.activate([
+            appNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            appNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            
+            signInButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            signInButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            signInButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -20)
+        ])
+    }
 }
-

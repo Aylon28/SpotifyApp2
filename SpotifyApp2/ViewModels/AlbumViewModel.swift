@@ -45,7 +45,7 @@ class AlbumViewModel {
     
     func fetchAlbumData() {
         guard let id = album?.id else { return }
-        APICaller.shared.getAlbumInfoById(id) { [weak self] result in
+        APICallerAlbums.Shared.GetAlbumInfoById(id) { [weak self] result in
             switch result {
             case .success(let album):
                 self?.albumDetails.value = album
@@ -57,18 +57,18 @@ class AlbumViewModel {
     
     func addButtonTapped() {
         guard let id = album?.id else { return }
-        APICaller.shared.manipulateAlbum(id, method: .PUT) { result in
+        APICallerAlbums.Shared.ManipulateAlbum(id, method: .PUT) { result in
             if result {
-                HapticsManager.shared.vibrate(for: .success)
+                HapticsManager.Shared.Vibrate(for: .success)
             }
         }
     }
     
     func removeButtonTapped(completion: @escaping (Bool) -> Void) {
         guard let id = album?.id else { return }
-        APICaller.shared.manipulateAlbum(id, method: .DELETE) { result in
+        APICallerAlbums.Shared.ManipulateAlbum(id, method: .DELETE) { result in
             if result {
-                HapticsManager.shared.vibrate(for: .success)
+                HapticsManager.Shared.Vibrate(for: .success)
             }
             completion(result)
         }

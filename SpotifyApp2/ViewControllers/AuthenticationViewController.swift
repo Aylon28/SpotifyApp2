@@ -29,7 +29,7 @@ class AuthenticationViewController: UIViewController, WKNavigationDelegate {
     private func setupWebView() {
         view.addSubview(webView)
         webView.navigationDelegate = self
-        guard let url = AuthenticationManager.shared.getAccessCodeURL() else { return }
+        guard let url = AuthenticationManager.Shared.GetAccessCodeURL() else { return }
         webView.load(url)
     }
     

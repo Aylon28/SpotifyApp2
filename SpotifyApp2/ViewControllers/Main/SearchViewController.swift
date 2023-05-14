@@ -22,16 +22,7 @@ class SearchViewController: UIViewController {
     private let collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewCompositionalLayout { _, _ -> NSCollectionLayoutSection in
-            let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
-                                                                                 heightDimension: .fractionalHeight(1)))
-            item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 10, bottom: 2, trailing: 10)
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                                                              heightDimension: .fractionalWidth(0.3)),
-                                                           repeatingSubitem: item,
-                                                           count: 2)
-            group.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-            let section = NSCollectionLayoutSection(group: group)
-            return section
+            CollectionViewLayout.createCategoriesViewCollectionViewLayout()
     })
 
     override func viewDidLoad() {

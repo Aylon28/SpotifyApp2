@@ -20,6 +20,7 @@ class UserProfileTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 16)
         label.textColor = .label
         label.numberOfLines = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -29,6 +30,7 @@ class UserProfileTableViewCell: UITableViewCell {
         label.textColor = .label
         label.textAlignment = .right
         label.numberOfLines = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -45,20 +47,24 @@ class UserProfileTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        titleLabel.frame = CGRect(x: 10,
-                                  y: 0,
-                                  width: contentView.width/3,
-                                  height: contentView.height)
-        valueLabel.frame = CGRect(x: contentView.width/3-10,
-                                  y: 0,
-                                  width: contentView.width-contentView.width/3,
-                                  height: contentView.height)
+        setAnchors()
     }
    
     func configure(viewModel: UserProfileTableViewCellViewModel) {
         titleLabel.text = viewModel.title
         valueLabel.text = viewModel.value
+    }
+    
+    private func setAnchors() {
+        NSLayoutConstraint.activate([
+            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            titleLabel.widthAnchor.constraint(equalToConstant: contentView.width/3),
+            
+            valueLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            valueLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            valueLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
+        ])
     }
 
 }

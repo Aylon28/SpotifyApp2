@@ -22,6 +22,7 @@ class PlaylistAlbumHeaderCollectionReusableView: UICollectionReusableView {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "house")
         imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -29,6 +30,7 @@ class PlaylistAlbumHeaderCollectionReusableView: UICollectionReusableView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .semibold)
         label.textColor = .label
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -36,6 +38,7 @@ class PlaylistAlbumHeaderCollectionReusableView: UICollectionReusableView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12)
         label.textColor = .label
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -43,6 +46,7 @@ class PlaylistAlbumHeaderCollectionReusableView: UICollectionReusableView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12)
         label.textColor = .secondaryLabel
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -51,12 +55,12 @@ class PlaylistAlbumHeaderCollectionReusableView: UICollectionReusableView {
         label.font = .systemFont(ofSize: 18)
         label.numberOfLines = 2
         label.textColor = .label
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         addSubview(coverImageView)
         addSubview(titleLabel)
         addSubview(ownerNameLabel)
@@ -70,12 +74,7 @@ class PlaylistAlbumHeaderCollectionReusableView: UICollectionReusableView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        coverImageView.frame = CGRect(x: 75, y: 0, width: width-150, height: width-150)
-        titleLabel.frame = CGRect(x: 10, y: coverImageView.bottom+10, width: width-20, height: 30)
-        ownerNameLabel.frame = CGRect(x: 10, y: titleLabel.bottom+5, width: width-20, height: 15)
-        descriptionLabel.frame = CGRect(x: 10, y: ownerNameLabel.bottom+10, width: width-20, height: 45)
-        detailsLabel.frame = CGRect(x: 10, y: descriptionLabel.bottom+10, width: width-20, height: 15)
+        setAnchors()
     }
     
     func configure(viewModel: PlaylistAlbumHeaderCollectionReusableViewViewModel, headerType: HeaderType) {
@@ -97,7 +96,29 @@ class PlaylistAlbumHeaderCollectionReusableView: UICollectionReusableView {
             }
             descriptionLabel.text = viewModel.description
         }
-        
+    }
+    
+    private func setAnchors() {
+        NSLayoutConstraint.activate([
+            coverImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            coverImageView.topAnchor.constraint(equalTo: topAnchor),
+            coverImageView.widthAnchor.constraint(equalToConstant: width-130),
+            coverImageView.heightAnchor.constraint(equalToConstant: width-130),
+            
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            titleLabel.topAnchor.constraint(equalTo: coverImageView.bottomAnchor, constant: 10),
+            
+            ownerNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            ownerNameLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
+            
+            descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            descriptionLabel.topAnchor.constraint(equalTo: ownerNameLabel.bottomAnchor, constant: 5),
+            descriptionLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -20),
+            descriptionLabel.heightAnchor.constraint(equalToConstant: 43),
+            
+            detailsLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            detailsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 5)
+        ])
     }
     
     enum HeaderType {

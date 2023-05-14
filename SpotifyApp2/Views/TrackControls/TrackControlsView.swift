@@ -15,6 +15,7 @@ class TrackControlsView: UIView {
         let button = UIButton()
         button.setImage(UIImage(systemName: "backward.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 34)), for: .normal)
         button.tintColor = .label
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -22,6 +23,7 @@ class TrackControlsView: UIView {
         let button = UIButton()
         button.setImage(UIImage(systemName: "forward.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 34)), for: .normal)
         button.tintColor = .label
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -29,6 +31,7 @@ class TrackControlsView: UIView {
         let button = UIButton()
         button.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 38)), for: .normal)
         button.tintColor = .label
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -36,12 +39,12 @@ class TrackControlsView: UIView {
         let slider = UISlider()
         slider.tintColor = .systemGreen
         slider.value = 0.2
+        slider.translatesAutoresizingMaskIntoConstraints = false
         return slider
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         addSubview(prevSongButton)
         addSubview(nextSongButton)
         addSubview(playPauseSongButton)
@@ -56,11 +59,7 @@ class TrackControlsView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        prevSongButton.frame = CGRect(x: 20, y: 0, width: 70, height: 70)
-        playPauseSongButton.frame = CGRect(x: (width/2)-35, y: 0, width: 70, height: 70)
-        nextSongButton.frame = CGRect(x: width-20-70, y: 0, width: 70, height: 70)
-        volumeSlider.frame = CGRect(x: 20, y: prevSongButton.bottom+20, width: width-40, height: 20)
+        setAnchors()
     }
     
     @objc private func didSlideSlider() {
@@ -75,5 +74,30 @@ class TrackControlsView: UIView {
             playPauseSongButton.setImage(UIImage(systemName: "play", withConfiguration: UIImage.SymbolConfiguration(pointSize: 38)), for: .normal)
         }
         viewModel.didTapPlayPauseSong()
+    }
+    
+    private func setAnchors() {
+        let controllerHeight: CGFloat = 70
+        NSLayoutConstraint.activate([
+            prevSongButton.topAnchor.constraint(equalTo: topAnchor),
+            prevSongButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            prevSongButton.heightAnchor.constraint(equalToConstant: controllerHeight),
+            prevSongButton.widthAnchor.constraint(equalToConstant: controllerHeight),
+            
+            playPauseSongButton.topAnchor.constraint(equalTo: topAnchor),
+            playPauseSongButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            playPauseSongButton.heightAnchor.constraint(equalToConstant: controllerHeight),
+            playPauseSongButton.widthAnchor.constraint(equalToConstant: controllerHeight),
+            
+            nextSongButton.topAnchor.constraint(equalTo: topAnchor),
+            nextSongButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            nextSongButton.heightAnchor.constraint(equalToConstant: controllerHeight),
+            nextSongButton.widthAnchor.constraint(equalToConstant: controllerHeight),
+            
+            volumeSlider.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            volumeSlider.topAnchor.constraint(equalTo: prevSongButton.bottomAnchor, constant: 20),
+            volumeSlider.widthAnchor.constraint(equalTo: widthAnchor, constant: -40),
+            volumeSlider.heightAnchor.constraint(equalToConstant: 20)
+        ])
     }
 }

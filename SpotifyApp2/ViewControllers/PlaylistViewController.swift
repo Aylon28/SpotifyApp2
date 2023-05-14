@@ -13,23 +13,7 @@ class PlaylistViewController: UIViewController {
     private let collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewCompositionalLayout { _, _ -> NSCollectionLayoutSection in
-            let supplementaryView = [
-                NSCollectionLayoutBoundarySupplementaryItem(
-                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(1)),
-                elementKind: UICollectionView.elementKindSectionHeader,
-                alignment: .top)
-            ]
-            
-            let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                                                 heightDimension: .fractionalHeight(1)))
-            item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 0, bottom: 2, trailing: 0)
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                                                              heightDimension: .absolute(60)),
-                                                           repeatingSubitem: item,
-                                                           count: 1)
-            let section = NSCollectionLayoutSection(group: group)
-            section.boundarySupplementaryItems = supplementaryView
-            return section
+            CollectionViewLayout.createPlaylistAlbumViewCollectionViewLayout()
     })
     
     init(viewModel: Playlist, isFromLibrary: Bool = false) {
@@ -46,8 +30,8 @@ class PlaylistViewController: UIViewController {
         
         setupCollectionView()
         setupNavigationItem()
-        viewModel.fetchPlaylistData()
         setupBindings()
+        viewModel.fetchPlaylistData()
     }
     
     override func viewDidLayoutSubviews() {

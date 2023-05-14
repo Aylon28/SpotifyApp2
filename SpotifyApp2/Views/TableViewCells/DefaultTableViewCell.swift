@@ -24,6 +24,7 @@ class DefaultTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "house")
         imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -32,6 +33,7 @@ class DefaultTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.textColor = .label
         label.numberOfLines = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -48,12 +50,7 @@ class DefaultTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        coverImageView.frame = CGRect(x: 5, y: 5, width: contentView.height-10, height: contentView.height-10)
-        titleLabel.frame = CGRect(x: coverImageView.right+10,
-                                  y: 0,
-                                  width: contentView.width-coverImageView.width-20,
-                                  height: contentView.height)
+        setAnchors()
     }
    
     func configure(viewModel: DefaultTableViewCellViewModel, isRounded: Bool = false) {
@@ -70,6 +67,19 @@ class DefaultTableViewCell: UITableViewCell {
         titleLabel.text = viewModel.title
         coverImageView.image = UIImage(systemName: viewModel.coverImage)
         coverImageView.tintColor = .label
+    }
+    
+    private func setAnchors() {
+        NSLayoutConstraint.activate([
+            coverImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            coverImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
+            coverImageView.widthAnchor.constraint(equalToConstant: contentView.height-10),
+            coverImageView.heightAnchor.constraint(equalToConstant: contentView.height-10),
+            
+            titleLabel.leadingAnchor.constraint(equalTo: coverImageView.trailingAnchor, constant: 10),
+            titleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -10),
+            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+        ])
     }
 
 }

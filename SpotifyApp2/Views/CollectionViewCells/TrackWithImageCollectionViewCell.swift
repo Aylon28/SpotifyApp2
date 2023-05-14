@@ -20,6 +20,7 @@ class TrackWithImageCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "house")
         imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -28,6 +29,7 @@ class TrackWithImageCollectionViewCell: UICollectionViewCell {
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.textColor = .label
         label.numberOfLines = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -36,6 +38,7 @@ class TrackWithImageCollectionViewCell: UICollectionViewCell {
         label.font = .systemFont(ofSize: 12)
         label.textColor = .label
         label.numberOfLines = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -46,29 +49,34 @@ class TrackWithImageCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(artistNameLabel)
         contentView.addSubview(coverImageView)
         contentView.backgroundColor = .secondarySystemBackground
+        setAnchors()
     }
     
     required init?(coder: NSCoder) {
         fatalError()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        coverImageView.frame = CGRect(x: 0, y: 0, width: contentView.height, height: contentView.height)
-        trackTitleLabel.frame = CGRect(x: coverImageView.right+10,
-                                       y: 0,
-                                       width: contentView.width-coverImageView.height-20,
-                                       height: contentView.height/2)
-        artistNameLabel.frame = CGRect(x: coverImageView.right+10,
-                                       y: contentView.height/2,
-                                       width: contentView.width-coverImageView.height-20,
-                                       height: contentView.height/2)
-    }
-    
     func configure(viewModel: TrackWithImageCollectionViewCellViewModel) {
         artistNameLabel.text = viewModel.artistName
         trackTitleLabel.text = viewModel.trackTitle
         coverImageView.sd_setImage(with: viewModel.coverImageURL)
+    }
+    
+    private func setAnchors() {
+        NSLayoutConstraint.activate([
+            coverImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            coverImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            coverImageView.heightAnchor.constraint(equalToConstant: contentView.height),
+            coverImageView.widthAnchor.constraint(equalToConstant: contentView.height),
+            
+            trackTitleLabel.leadingAnchor.constraint(equalTo: coverImageView.trailingAnchor, constant: 10),
+            trackTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            trackTitleLabel.bottomAnchor.constraint(equalTo: contentView.centerYAnchor),
+            trackTitleLabel.widthAnchor.constraint(equalToConstant: contentView.width-coverImageView.width-20),
+            
+            artistNameLabel.leadingAnchor.constraint(equalTo: coverImageView.trailingAnchor, constant: 10),
+            artistNameLabel.topAnchor.constraint(equalTo: contentView.centerYAnchor),
+            artistNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
     }
 }

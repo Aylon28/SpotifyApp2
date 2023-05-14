@@ -74,7 +74,7 @@ class HomeViewModel {
         group.enter()
         group.enter()
         
-        APICaller.shared.getNewReleases { result in
+        APICallerAlbums.Shared.GetNewReleases { result in
             switch result {
             case .success(let newReleasesResponse):
                 newReleases = newReleasesResponse
@@ -84,7 +84,7 @@ class HomeViewModel {
             }
         }
         
-        APICaller.shared.getFeaturedPlaylists { result in
+        APICallerPlaylists.Shared.GetFeaturedPlaylists { result in
             switch result {
             case .success(let featuredPlaylistsResponse):
                 featuredPlaylists = featuredPlaylistsResponse
@@ -94,7 +94,7 @@ class HomeViewModel {
             }
         }
         
-        APICaller.shared.getUsersTopTracks(for: "short_term") { result in
+        APICallerTracks.Shared.GetUsersTopTracks(for: "short_term") { result in
             switch result {
             case .success(let topTracksResponse):
                 topTracks = topTracksResponse
@@ -104,7 +104,7 @@ class HomeViewModel {
             }
         }
         
-        APICaller.shared.getUsersTopTracks(for: "long_term") { result in
+        APICallerTracks.Shared.GetUsersTopTracks(for: "long_term") { result in
             switch result {
             case .success(let allTimeFavouriteTracksResponse):
                 allTimeFavouriteTracks = allTimeFavouriteTracksResponse

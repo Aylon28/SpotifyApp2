@@ -14,12 +14,12 @@ class SectionTitleCollectionReusableView: UICollectionReusableView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 25, weight: .semibold)
         label.textColor = .label
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         addSubview(titleLabel)
     }
     
@@ -29,12 +29,18 @@ class SectionTitleCollectionReusableView: UICollectionReusableView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        titleLabel.frame = CGRect(x: 10, y: 0, width: width-20, height: height)
+        setAnchors()
     }
     
     func configure(title: String) {
         titleLabel.text = title
+    }
+    
+    private func setAnchors() {
+        NSLayoutConstraint.activate([
+            titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10)
+        ])
     }
     
 }

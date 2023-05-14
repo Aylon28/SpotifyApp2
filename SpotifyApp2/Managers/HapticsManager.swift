@@ -9,11 +9,11 @@ import Foundation
 import UIKit
 
 struct HapticsManager {
-    static let shared = HapticsManager()
+    static let Shared = HapticsManager()
     
     private init() {}
     
-    public func vibrate(for type: UINotificationFeedbackGenerator.FeedbackType) {
+    public func Vibrate(for type: UINotificationFeedbackGenerator.FeedbackType) {
         DispatchQueue.main.async {
             let generator = UINotificationFeedbackGenerator()
             generator.prepare()

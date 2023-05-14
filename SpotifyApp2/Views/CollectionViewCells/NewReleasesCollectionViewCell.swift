@@ -21,6 +21,7 @@ class NewReleasesCollectionViewCell: UICollectionViewCell {
         label.font = .systemFont(ofSize: 12)
         label.textColor = .label
         label.numberOfLines = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -28,6 +29,7 @@ class NewReleasesCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "house")
         imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -36,20 +38,11 @@ class NewReleasesCollectionViewCell: UICollectionViewCell {
         
         contentView.addSubview(albumTitleLabel)
         contentView.addSubview(coverImageView)
+        setAnchors()
     }
     
     required init?(coder: NSCoder) {
         fatalError()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        coverImageView.frame = CGRect(x: 0, y: 0, width: contentView.height, height: contentView.height)
-        albumTitleLabel.frame = CGRect(x: coverImageView.right+10,
-                                       y: 0,
-                                       width: contentView.width-coverImageView.height-20,
-                                       height: contentView.height)
     }
     
     func configure(viewModel: NewReleasesCollectionViewCellViewModel) {
@@ -59,5 +52,20 @@ class NewReleasesCollectionViewCell: UICollectionViewCell {
         contentView.backgroundColor = .secondarySystemBackground
         contentView.layer.cornerRadius = 10
         contentView.layer.masksToBounds = true
+    }
+    
+    private func setAnchors() {
+        let imageSize = contentView.height
+        
+        NSLayoutConstraint.activate([
+            coverImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            coverImageView.heightAnchor.constraint(equalToConstant: imageSize),
+            coverImageView.widthAnchor.constraint(equalToConstant: imageSize),
+            coverImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            
+            albumTitleLabel.leadingAnchor.constraint(equalTo: coverImageView.trailingAnchor, constant: 10),
+            albumTitleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            albumTitleLabel.widthAnchor.constraint(equalToConstant: contentView.width-imageSize-10)
+        ])
     }
 }

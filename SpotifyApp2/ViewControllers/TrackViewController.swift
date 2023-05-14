@@ -15,6 +15,7 @@ class TrackViewController: UIViewController {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "house")
         imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -23,6 +24,7 @@ class TrackViewController: UIViewController {
         label.font = .systemFont(ofSize: 20)
         label.textColor = .label
         label.numberOfLines = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -31,6 +33,7 @@ class TrackViewController: UIViewController {
         label.font = .systemFont(ofSize: 15)
         label.textColor = .label
         label.numberOfLines = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -39,6 +42,7 @@ class TrackViewController: UIViewController {
         label.font = .systemFont(ofSize: 10)
         label.textColor = .secondaryLabel
         label.numberOfLines = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -55,19 +59,12 @@ class TrackViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupUI()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        let imageSize = view.width-40
-        coverImageView.frame = CGRect(x: 20, y: view.safeAreaInsets.top+10, width: imageSize, height: imageSize)
-        trackNameLabel.frame = CGRect(x: 20, y: coverImageView.bottom+15, width: view.width-40, height: 20)
-        artistNameLabel.frame = CGRect(x: 20, y: trackNameLabel.bottom+10, width: view.width-40, height: 20)
-        popularityLabel.frame = CGRect(x: 20, y: artistNameLabel.bottom+10, width:  view.width-40, height: 12)
-        trackControlsView.frame = CGRect(x: 0, y: artistNameLabel.bottom+60, width: view.width, height: 120)
+        setAnchors()
     }
     
     private func setupUI() {
@@ -99,5 +96,32 @@ class TrackViewController: UIViewController {
             }
             self?.present(vc, animated: true)
         }
+    }
+    
+    private func setAnchors() {
+        let imageSize = view.width-40
+        trackControlsView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            coverImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            coverImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            coverImageView.widthAnchor.constraint(equalToConstant: imageSize),
+            coverImageView.heightAnchor.constraint(equalToConstant: imageSize),
+            
+            trackNameLabel.leadingAnchor.constraint(equalTo: coverImageView.leadingAnchor),
+            trackNameLabel.topAnchor.constraint(equalTo: coverImageView.bottomAnchor, constant: 15),
+            trackNameLabel.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40),
+            
+            artistNameLabel.leadingAnchor.constraint(equalTo: coverImageView.leadingAnchor),
+            artistNameLabel.topAnchor.constraint(equalTo: trackNameLabel.bottomAnchor, constant: 10),
+            
+            popularityLabel.leadingAnchor.constraint(equalTo: coverImageView.leadingAnchor),
+            popularityLabel.topAnchor.constraint(equalTo: artistNameLabel.bottomAnchor, constant: 10),
+            
+            trackControlsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            trackControlsView.topAnchor.constraint(equalTo: artistNameLabel.bottomAnchor, constant: 60),
+            trackControlsView.widthAnchor.constraint(equalToConstant: view.width),
+            trackControlsView.heightAnchor.constraint(equalToConstant: 120)
+        ])
     }
 }

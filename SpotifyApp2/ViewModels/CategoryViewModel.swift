@@ -34,7 +34,7 @@ class CategoryViewModel {
     
     func fetchPlaylistsData() {
         guard let id = category?.id else { return }
-        APICaller.shared.getPlaylistsByCategoryId(id) { [weak self] result in
+        APICallerPlaylists.Shared.GetPlaylistsByCategoryId(id) { [weak self] result in
             switch result {
             case .success(let playlists):
                 self?.categoryPlaylists.value = playlists.playlists.items

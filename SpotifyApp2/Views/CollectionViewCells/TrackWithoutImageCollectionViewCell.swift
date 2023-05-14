@@ -21,6 +21,7 @@ class TrackWithoutImageCollectionViewCell: UICollectionViewCell {
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.textColor = .label
         label.numberOfLines = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -29,12 +30,12 @@ class TrackWithoutImageCollectionViewCell: UICollectionViewCell {
         label.font = .systemFont(ofSize: 12)
         label.textColor = .label
         label.numberOfLines = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         contentView.addSubview(trackTitleLabel)
         contentView.addSubview(artistNameLabel)
         contentView.backgroundColor = .secondarySystemBackground
@@ -46,19 +47,24 @@ class TrackWithoutImageCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        trackTitleLabel.frame = CGRect(x: 10,
-                                       y: 0,
-                                       width: contentView.width-20,
-                                       height: contentView.height/2)
-        artistNameLabel.frame = CGRect(x: 10,
-                                       y: contentView.height/2,
-                                       width: contentView.width-20,
-                                       height: contentView.height/2)
+        setAnchors()
     }
     
     func configure(viewModel: TrackWithoutImageCollectionViewCellViewModel) {
         artistNameLabel.text = viewModel.artistName
         trackTitleLabel.text = viewModel.trackTitle
+    }
+    
+    private func setAnchors() {
+        NSLayoutConstraint.activate([
+            trackTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            trackTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            trackTitleLabel.bottomAnchor.constraint(equalTo: contentView.centerYAnchor),
+            trackTitleLabel.widthAnchor.constraint(equalToConstant: contentView.width-20),
+            
+            artistNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            artistNameLabel.topAnchor.constraint(equalTo: contentView.centerYAnchor),
+            artistNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
     }
 }

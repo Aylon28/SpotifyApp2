@@ -20,7 +20,7 @@ class SearchViewModel {
     }
     
     func fetchCategories() {
-        APICaller.shared.getCategories { [weak self] result in
+        APICallerSearch.Shared.GetCategories { [weak self] result in
             switch result {
             case .success(let categoriesResponse):
                 self?.categories.value = categoriesResponse.categories.items
@@ -31,7 +31,7 @@ class SearchViewModel {
     }
     
     func searchButtonClicked(_ query: String, completion: @escaping ([SearchResult]) -> Void) {
-        APICaller.shared.getSearchResult(query: query) { result in
+        APICallerSearch.Shared.GetSearchResult(query: query) { result in
             switch result {
             case .success(let searchResponse):
                 var searchResults = [SearchResult]()

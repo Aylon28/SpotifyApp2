@@ -11,7 +11,7 @@ class AuthenticationViewModel {
     var completionHandler: ((Bool) -> Void)?
     
     func changeCodeForToken(_ code: String, completion: @escaping (Bool) -> Void) {
-        AuthenticationManager.shared.changeCodeForToken(code: code) { [weak self] result in
+        AuthenticationManager.Shared.ChangeCodeForToken(code: code) { [weak self] result in
             DispatchQueue.main.async {
                 if result {
                     self?.completionHandler?(result)

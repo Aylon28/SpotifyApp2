@@ -25,7 +25,7 @@ class ProfileViewModel {
     }
     
     func fetchUserData(completion: @escaping (Bool) -> Void) {
-        APICaller.shared.getUserProfile { [weak self] result in
+        APICallerUser.Shared.GetUserProfile { [weak self] result in
             switch result {
             case .success(let userInfoResponse):
                 self?.userInfoResponse = userInfoResponse

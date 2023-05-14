@@ -16,9 +16,9 @@ class TrackViewModel {
     
     func addTrackButtonTapped(_ playlistId: String) {
         guard let id = track?.id else { return }
-        APICaller.shared.saveTrackWith(id, to: playlistId) { result in
+        APICallerTracks.Shared.SaveTrackWith(id, to: playlistId) { result in
             if result {
-                HapticsManager.shared.vibrate(for: .success)
+                HapticsManager.Shared.Vibrate(for: .success)
             }
         }
     }

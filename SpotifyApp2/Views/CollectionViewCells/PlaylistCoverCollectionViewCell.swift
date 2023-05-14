@@ -21,6 +21,7 @@ class PlaylistCoverCollectionViewCell: UICollectionViewCell {
         label.font = .systemFont(ofSize: 15)
         label.textColor = .label
         label.numberOfLines = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -29,6 +30,7 @@ class PlaylistCoverCollectionViewCell: UICollectionViewCell {
         label.font = .systemFont(ofSize: 10)
         label.textColor = .label
         label.numberOfLines = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -36,6 +38,7 @@ class PlaylistCoverCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "house")
         imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -54,16 +57,29 @@ class PlaylistCoverCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        coverImageView.frame = CGRect(x: 10, y: 10, width: contentView.width-20, height: contentView.width-20)
-        playlistTitleLabel.frame = CGRect(x: 10, y: coverImageView.bottom+10, width: contentView.width-20, height: 20)
-        ownerNameLabel.frame = CGRect(x: 10, y: playlistTitleLabel.bottom+5, width: contentView.width-20, height: 20)
+        setAnchors()
     }
     
     func configure(viewModel: PlaylistCoverCollectionViewCellViewModel) {
         playlistTitleLabel.text = viewModel.playlistName
         ownerNameLabel.text = viewModel.ownerName
         coverImageView.sd_setImage(with: viewModel.coverURL)
+    }
+    
+    private func setAnchors() {
+        NSLayoutConstraint.activate([
+            coverImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            coverImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            coverImageView.heightAnchor.constraint(equalToConstant: contentView.width-20),
+            coverImageView.widthAnchor.constraint(equalToConstant: contentView.width-20),
+            
+            playlistTitleLabel.leadingAnchor.constraint(equalTo: coverImageView.leadingAnchor),
+            playlistTitleLabel.topAnchor.constraint(equalTo: coverImageView.bottomAnchor, constant: 10),
+            playlistTitleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            
+            ownerNameLabel.topAnchor.constraint(equalTo: playlistTitleLabel.bottomAnchor, constant: 5),
+            ownerNameLabel.leadingAnchor.constraint(equalTo: coverImageView.leadingAnchor)
+        ])
     }
     
 }

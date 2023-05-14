@@ -19,6 +19,8 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "house")
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -28,6 +30,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         label.textColor = .label
         label.numberOfLines = 2
         label.layer.zPosition = 5
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -44,12 +47,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        coverImageView.frame = CGRect(x: contentView.width/1.6, y: contentView.height/2, width: contentView.width/3, height: contentView.width/3)
-        categoryTitleLabel.frame = CGRect(x: 10,
-                                          y: 10,
-                                          width: contentView.width-20,
-                                          height: 40)
+        setAnchors()
     }
     
     func configure(viewModel: CategoryCollectionViewCellViewModel) {
@@ -60,6 +58,20 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         contentView.backgroundColor = colors.randomElement()
         contentView.layer.cornerRadius = 10
         contentView.layer.masksToBounds = true
+    }
+    
+    private func setAnchors() {
+        NSLayoutConstraint.activate([
+            coverImageView.topAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -10),
+            coverImageView.heightAnchor.constraint(equalToConstant: contentView.width/2.2),
+            coverImageView.widthAnchor.constraint(equalToConstant: contentView.width/2.2),
+            coverImageView.leadingAnchor.constraint(equalTo: contentView.centerXAnchor, constant: contentView.width*0.05),
+            
+            categoryTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            categoryTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            categoryTitleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -20),
+            categoryTitleLabel.heightAnchor.constraint(equalToConstant: 40)
+        ])
     }
     
     private let colors: [UIColor] = [

@@ -18,7 +18,7 @@ class HomeViewController: UIViewController {
     private let collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewCompositionalLayout { sectionIndex, _ -> NSCollectionLayoutSection in
-            return HomeViewController.createCollectionViewSection(sectionIndex: sectionIndex)
+            CollectionViewLayout.createHomeViewCollectionViewLayout(sectionIndex: sectionIndex)
     })
 
     override func viewDidLoad() {
@@ -27,8 +27,8 @@ class HomeViewController: UIViewController {
         setupUI()
         setupCollectionView()
         setupRefreshControl()
-        viewModel.fetchData()
         setupBindings()
+        viewModel.fetchData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,78 +68,6 @@ class HomeViewController: UIViewController {
     @objc private func didRefresh(_ sender: UIRefreshControl) {
         viewModel.fetchData()
         sender.endRefreshing()
-    }
-    
-    private static func createCollectionViewSection(sectionIndex: Int) -> NSCollectionLayoutSection {
-        let supplementaryView = [
-            NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(70)),
-            elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .top)
-        ]
-        switch sectionIndex {
-        case 0:
-            let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                                                 heightDimension: .absolute(60)))
-            item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
-                                                                                              heightDimension: .absolute(60)),
-                                                           repeatingSubitem: item,
-                                                           count: 2)
-            let section = NSCollectionLayoutSection(group: group)
-            section.boundarySupplementaryItems = supplementaryView
-            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
-            return section
-        case 1:
-            let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                                                 heightDimension: .fractionalHeight(1)))
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.45),
-                                                                                              heightDimension: .absolute(250)),
-                                                           repeatingSubitem: item,
-                                                           count: 1)
-            let section = NSCollectionLayoutSection(group: group)
-            section.boundarySupplementaryItems = supplementaryView
-            section.orthogonalScrollingBehavior = .groupPaging
-            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
-            return section
-        case 2:
-            let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                                                 heightDimension: .absolute(70)))
-            item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
-            let group = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.85),
-                                                                                              heightDimension: .absolute(350)),
-                                                         repeatingSubitem: item,
-                                                         count: 5)
-            let section = NSCollectionLayoutSection(group: group)
-            section.boundarySupplementaryItems = supplementaryView
-            section.orthogonalScrollingBehavior = .groupPagingCentered
-            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
-            return section
-        case 3:
-            let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                                                 heightDimension: .absolute(60)))
-            item.contentInsets = NSDirectionalEdgeInsets(top: 1, leading: 5, bottom: 1, trailing: 5)
-            let group = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                                                            heightDimension: .absolute(60)),
-                                                         repeatingSubitem: item,
-                                                         count: 1)
-            let section = NSCollectionLayoutSection(group: group)
-            section.boundarySupplementaryItems = supplementaryView
-            return section
-        default:
-            let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                                                 heightDimension: .absolute(60)))
-            item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
-                                                                                              heightDimension: .absolute(60)),
-                                                           repeatingSubitem: item,
-                                                           count: 2)
-            let section = NSCollectionLayoutSection(group: group)
-            section.boundarySupplementaryItems = supplementaryView
-            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
-            return section
-        }
-
     }
     
     private func setupCollectionView() {

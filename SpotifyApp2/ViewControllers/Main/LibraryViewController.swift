@@ -12,16 +12,18 @@ class LibraryViewController: UIViewController {
     var viewModel: LibraryViewModel!
     
     private let segmentController: UISegmentedControl = {
-        let sc = UISegmentedControl(items: ["Playlists", "Albums", "Artists"])
-        sc.selectedSegmentIndex = 0
-        sc.selectedSegmentTintColor = .systemGreen
-        return sc
+        let segmentControl = UISegmentedControl(items: ["Playlists", "Albums", "Artists"])
+        segmentControl.selectedSegmentIndex = 0
+        segmentControl.selectedSegmentTintColor = .systemGreen
+        segmentControl.translatesAutoresizingMaskIntoConstraints = false
+        return segmentControl
     }()
     
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(SubtitleTableViewCell.self, forCellReuseIdentifier: SubtitleTableViewCell.identifier)
         tableView.register(DefaultTableViewCell.self, forCellReuseIdentifier: DefaultTableViewCell.identifier)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
@@ -44,15 +46,13 @@ class LibraryViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.fetchData()
         navigationItem.largeTitleDisplayMode = .always
-        tableView.reloadData()
+        viewModel.fetchData()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        segmentController.frame = CGRect(x: 0, y: view.safeAreaInsets.top+10, width: view.width, height: 35)
-        tableView.frame = CGRect(x: 0, y: segmentController.bottom, width: view.width, height: view.height-segmentController.height-(tabBarController?.tabBar.frame.size.height ?? 0)-view.safeAreaInsets.bottom)
+        setAnchors()
     }
     
     private func setupBindings() {
@@ -108,7 +108,19 @@ class LibraryViewController: UIViewController {
         })
         present(alertController, animated: true)
     }
-
+    
+    private func setAnchors() {
+        NSLayoutConstraint.activate([
+            segmentController.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            segmentController.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            segmentController.widthAnchor.constraint(equalTo: view.widthAnchor),
+            
+            tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            tableView.topAnchor.constraint(equalTo: segmentController.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: tabBarController?.tabBar.topAnchor ?? view.bottomAnchor),
+            tableView.widthAnchor.constraint(equalTo: view.widthAnchor)
+        ])
+    }
 }
 
 extension LibraryViewController: UITableViewDelegate, UITableViewDataSource {

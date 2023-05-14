@@ -77,34 +77,34 @@ class SearchResultViewModel {
     }
     
     func saveArtist(_ id: String) {
-        APICaller.shared.saveArtistWith(id) { [weak self] result in
+        APICallerArtists.Shared.SaveArtistWith(id) { [weak self] result in
             self?.hapticsResponse(result)
         }
     }
     
     func saveTrack(_ id: String, playlisId: String) {
-        APICaller.shared.saveTrackWith(id, to: playlisId) { [weak self] result in
+        APICallerTracks.Shared.SaveTrackWith(id, to: playlisId) { [weak self] result in
             self?.hapticsResponse(result)
         }
     }
     
     func savePlaylist(_ id: String) {
-        APICaller.shared.manipulatePlaylist(id, method: .PUT) { [weak self] result in
+        APICallerPlaylists.Shared.ManipulatePlaylist(id, method: .PUT) { [weak self] result in
             self?.hapticsResponse(result)
         }
     }
     
     func saveAlbum(_ id: String) {
-        APICaller.shared.manipulateAlbum(id, method: .PUT) { [weak self] result in
+        APICallerAlbums.Shared.ManipulateAlbum(id, method: .PUT) { [weak self] result in
             self?.hapticsResponse(result)
         }
     }
     
     private func hapticsResponse(_ result: Bool) {
         if result {
-            HapticsManager.shared.vibrate(for: .success)
+            HapticsManager.Shared.Vibrate(for: .success)
         } else {
-            HapticsManager.shared.vibrate(for: .error)
+            HapticsManager.Shared.Vibrate(for: .error)
         }
     }
     
