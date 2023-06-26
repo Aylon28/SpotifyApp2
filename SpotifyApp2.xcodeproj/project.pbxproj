@@ -44,8 +44,7 @@
 		F838AB0E29F1A5A600A835CC /* APICallerArtists.swift in Sources */ = {isa = PBXBuildFile; fileRef = F838AB0D29F1A5A600A835CC /* APICallerArtists.swift */; };
 		F838AB1029F1A66B00A835CC /* APICallerUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F838AB0F29F1A66B00A835CC /* APICallerUser.swift */; };
 		F838AB1229F1A6E700A835CC /* APICallerSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F838AB1129F1A6E700A835CC /* APICallerSearch.swift */; };
-		F847107E2A2CC2F600AEAAF7 /* TableAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F847107D2A2CC2F600AEAAF7 /* TableAdapter.swift */; };
-		F84710802A2CC32900AEAAF7 /* UICollectionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F847107F2A2CC32900AEAAF7 /* UICollectionProtocol.swift */; };
+		F84BA17F2A4991C6005724FC /* SearchResultTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84BA17E2A4991C6005724FC /* SearchResultTableViewAdapter.swift */; };
 		F84BD91929E978F3004741C2 /* AuthenticationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84BD91829E978F3004741C2 /* AuthenticationResponse.swift */; };
 		F84BD91B29EAEEC8004741C2 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84BD91A29EAEEC7004741C2 /* Observable.swift */; };
 		F84BD91E29EAF129004741C2 /* AlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84BD91D29EAF129004741C2 /* AlbumViewModel.swift */; };
@@ -128,8 +127,7 @@
 		F838AB0D29F1A5A600A835CC /* APICallerArtists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICallerArtists.swift; sourceTree = "<group>"; };
 		F838AB0F29F1A66B00A835CC /* APICallerUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICallerUser.swift; sourceTree = "<group>"; };
 		F838AB1129F1A6E700A835CC /* APICallerSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICallerSearch.swift; sourceTree = "<group>"; };
-		F847107D2A2CC2F600AEAAF7 /* TableAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableAdapter.swift; sourceTree = "<group>"; };
-		F847107F2A2CC32900AEAAF7 /* UICollectionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionProtocol.swift; sourceTree = "<group>"; };
+		F84BA17E2A4991C6005724FC /* SearchResultTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewAdapter.swift; sourceTree = "<group>"; };
 		F84BD91829E978F3004741C2 /* AuthenticationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationResponse.swift; sourceTree = "<group>"; };
 		F84BD91A29EAEEC7004741C2 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		F84BD91D29EAF129004741C2 /* AlbumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModel.swift; sourceTree = "<group>"; };
@@ -265,10 +263,17 @@
 		F847107C2A2CC27500AEAAF7 /* Adapters */ = {
 			isa = PBXGroup;
 			children = (
-				F847107F2A2CC32900AEAAF7 /* UICollectionProtocol.swift */,
-				F847107D2A2CC2F600AEAAF7 /* TableAdapter.swift */,
+				F84BA17D2A499001005724FC /* TableViews */,
 			);
 			path = Adapters;
+			sourceTree = "<group>";
+		};
+		F84BA17D2A499001005724FC /* TableViews */ = {
+			isa = PBXGroup;
+			children = (
+				F84BA17E2A4991C6005724FC /* SearchResultTableViewAdapter.swift */,
+			);
+			path = TableViews;
 			sourceTree = "<group>";
 		};
 		F84BD91C29EAF0A3004741C2 /* ViewModels */ = {
@@ -539,7 +544,6 @@
 				F83737DE29E7005100339C3C /* TrackControlsView.swift in Sources */,
 				F83737B629E1EC3300339C3C /* SectionTitleCollectionReusableView.swift in Sources */,
 				F84BD92529EB513B004741C2 /* CategoryViewModel.swift in Sources */,
-				F84710802A2CC32900AEAAF7 /* UICollectionProtocol.swift in Sources */,
 				F8BBBDC629DF2C7900D15E3E /* SignInViewController.swift in Sources */,
 				F8BBBDC229DF2C7900D15E3E /* AppDelegate.swift in Sources */,
 				F83737C829E2F83C00339C3C /* TrackWithoutImageCollectionViewCell.swift in Sources */,
@@ -569,7 +573,6 @@
 				F84BD95029ED6B32004741C2 /* Track.swift in Sources */,
 				F84BD91E29EAF129004741C2 /* AlbumViewModel.swift in Sources */,
 				F84BD94629ED6A54004741C2 /* Album.swift in Sources */,
-				F847107E2A2CC2F600AEAAF7 /* TableAdapter.swift in Sources */,
 				F84BD91B29EAEEC8004741C2 /* Observable.swift in Sources */,
 				F83737C629E2F67F00339C3C /* AlbumDetailsResponse.swift in Sources */,
 				F84BD93329EC58D1004741C2 /* SignInViewModel.swift in Sources */,
@@ -592,6 +595,7 @@
 				F84BD93129EC511B004741C2 /* SettingsViewModel.swift in Sources */,
 				F83737C229E2EEE200339C3C /* TrackWithImageCollectionViewCell.swift in Sources */,
 				F83737B429E1E55A00339C3C /* NewReleasesResponse.swift in Sources */,
+				F84BA17F2A4991C6005724FC /* SearchResultTableViewAdapter.swift in Sources */,
 				F84BD92929EC143B004741C2 /* SearchResultViewModel.swift in Sources */,
 				F83737D829E5941500339C3C /* CategoryViewController.swift in Sources */,
 				F84BD93C29ED6484004741C2 /* TrackControlsViewModel.swift in Sources */,

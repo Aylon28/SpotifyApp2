@@ -10,26 +10,26 @@ import UIKit
 class SearchResultViewController: UIViewController {
     var viewModel = SearchResultViewModel()
     
-    //var tableAdapter: UICollectionProtocol!
-    private let tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(DefaultTableViewCell.self, forCellReuseIdentifier: DefaultTableViewCell.identifier)
-        tableView.register(SubtitleTableViewCell.self, forCellReuseIdentifier: SubtitleTableViewCell.identifier)
-        return tableView
-    }()
+    lazy private var tableViewAdapter = SearchResultTableViewAdapter(viewModel: viewModel)
+    
+//    private let tableView: UITableView = {
+//        let tableView = UITableView(frame: .zero, style: .grouped)
+//        tableView.register(DefaultTableViewCell.self, forCellReuseIdentifier: DefaultTableViewCell.identifier)
+//        tableView.register(SubtitleTableViewCell.self, forCellReuseIdentifier: SubtitleTableViewCell.identifier)
+//        return tableView
+//    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(tableView)
-        //tableAdapter = TableAdapter(tableView: tableView)
+        view.addSubview(tableViewAdapter.tableView)
         
-        setupTableView()
-//        setupBindings()
+        //setupTableView()
+        setupBindings()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tableView.frame = view.bounds
+        tableViewAdapter.tableView.frame = view.bounds
     }
     
     func setupTableView() {
@@ -39,7 +39,7 @@ class SearchResultViewController: UIViewController {
     
     private func setupBindings() {
         viewModel.sections.bind { [weak self] _ in
-            self?.tableView.reloadData()
+            self?.tableViewAdapter.tableView.reloadData()
         }
     }
 

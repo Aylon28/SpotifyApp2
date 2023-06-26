@@ -151,23 +151,23 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "90E41947-6C1C-4F36-AB73-9EA4B2075CE8"
+            uuid = "4ADA05F3-CBDC-44F6-B3FD-EB5288D18D68"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SpotifyApp2/ViewControllers/SearchResultViewController.swift"
+            filePath = "SpotifyApp2/ViewControllers/Main/HomeViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
-            landmarkName = "tableView"
-            landmarkType = "24">
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "setupBindings()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "90D3C85B-99C7-4B91-9302-8D3485EE8630"
+            uuid = "E0018C85-4796-4EB0-A7B0-5462244CFD1A"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -183,16 +183,176 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4ADA05F3-CBDC-44F6-B3FD-EB5288D18D68"
+            uuid = "08663B1D-BBD0-4671-A791-73C38C65E875"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SpotifyApp2/ViewControllers/Main/HomeViewController.swift"
+            filePath = "SpotifyApp2/ViewControllers/SearchResultViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "setupBindings()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "08663B1D-BBD0-4671-A791-73C38C65E875 - 9ecbdaabc6434da5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SpotifyApp2.SearchResultViewController.setupBindings() -&gt; ()"
+                  moduleName = "SpotifyApp2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aylon/XcodeProjects/Practice/SpotifyApp2/SpotifyApp2/ViewControllers/SearchResultViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "26">
+               </Location>
+               <Location
+                  uuid = "08663B1D-BBD0-4671-A791-73C38C65E875 - abec5d6e04d03534"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;SpotifyApp2.SearchSection&gt;&gt;) -&gt; () in SpotifyApp2.SearchResultViewController.setupBindings() -&gt; ()"
+                  moduleName = "SpotifyApp2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aylon/XcodeProjects/Practice/SpotifyApp2/SpotifyApp2/ViewControllers/SearchResultViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "58">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E5FE4250-77F8-4025-A6E4-DAFEADC6D22A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SpotifyApp2/Adapters/TableViews/SearchResultTableViewAdapter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F9AD5917-4985-4FA8-A554-7F6D05424EA9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SpotifyApp2/Managers/APICallers/APICallerSearch.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "GetSearchResult(query:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "40852367-27AF-4515-9313-C27FAEE3038F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SpotifyApp2/ViewModels/SearchResultViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "filterResults(results:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "40852367-27AF-4515-9313-C27FAEE3038F - 597bc35dc8d5276e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SpotifyApp2.SearchResultViewModel.filterResults(results: Swift.Array&lt;SpotifyApp2.SearchResult&gt;) -&gt; ()"
+                  moduleName = "SpotifyApp2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aylon/XcodeProjects/Practice/SpotifyApp2/SpotifyApp2/ViewModels/SearchResultViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "112"
+                  endingLineNumber = "112"
+                  offsetFromSymbolStart = "90">
+               </Location>
+               <Location
+                  uuid = "40852367-27AF-4515-9313-C27FAEE3038F - 78bfb04c58377f10"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (SpotifyApp2.SearchResult) -&gt; Swift.Bool in SpotifyApp2.SearchResultViewModel.filterResults(results: Swift.Array&lt;SpotifyApp2.SearchResult&gt;) -&gt; ()"
+                  moduleName = "SpotifyApp2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aylon/XcodeProjects/Practice/SpotifyApp2/SpotifyApp2/ViewModels/SearchResultViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "114"
+                  endingLineNumber = "114"
+                  offsetFromSymbolStart = "431">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AF0DE360-538E-4983-BCFE-36E7369C2DD3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SpotifyApp2/ViewModels/SearchResultViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "filterResults(results:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "174FEACD-015A-4C6D-844C-9977F4C54E0C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SpotifyApp2/Adapters/TableViews/SearchResultTableViewAdapter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "numberOfSections(in:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "87813387-6673-4187-9834-B81F99ED4BA0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SpotifyApp2/Adapters/TableViews/SearchResultTableViewAdapter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "tableView(_:numberOfRowsInSection:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

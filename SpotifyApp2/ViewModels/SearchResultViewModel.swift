@@ -143,5 +143,7 @@ class SearchResultViewModel {
             SearchSection(sectionTitle: "Albums", sectionContent: albums),
             SearchSection(sectionTitle: "Playlists", sectionContent: playlists)
         ]
+        
+        print(sectionsCount)
     }
 }
