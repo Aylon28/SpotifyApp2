@@ -8,25 +8,25 @@
 import Foundation
 import UIKit
 
-class SearchResultTableViewAdapter: NSObject {
+class SearchResultTableViewAdapter: UITableView {
     var viewModel: SearchResultViewModel!
     
-    var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(DefaultTableViewCell.self, forCellReuseIdentifier: DefaultTableViewCell.identifier)
-        tableView.register(SubtitleTableViewCell.self, forCellReuseIdentifier: SubtitleTableViewCell.identifier)
-        return tableView
-    }()
-    
     init(viewModel: SearchResultViewModel) {
-        super.init()
+        super.init(frame: .zero, style: .grouped)
+        register(DefaultTableViewCell.self, forCellReuseIdentifier: DefaultTableViewCell.identifier)
+        register(SubtitleTableViewCell.self, forCellReuseIdentifier: SubtitleTableViewCell.identifier)
+        
         self.viewModel = viewModel
         setup()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("")
+    }
+    
     func setup() {
-        tableView.dataSource = self
-        tableView.delegate = self
+        dataSource = self
+        delegate = self
     }
 }
 
