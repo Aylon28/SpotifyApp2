@@ -37,9 +37,7 @@ class ProfileViewController: UIViewController {
     
     private func setupBindings() {
         viewModel.userInfo.bind { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
-            }
+            self?.tableView.reloadData()
         }
     }
     

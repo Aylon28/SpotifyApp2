@@ -53,9 +53,7 @@ class CategoryViewController: UIViewController {
     
     private func setupBindings() {
         viewModel?.categoryPlaylists.bind { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.collectionView.reloadData()
-            }
+            self?.collectionView.reloadData()
         }
     }
 }

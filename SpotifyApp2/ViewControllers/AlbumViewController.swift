@@ -75,9 +75,7 @@ class AlbumViewController: UIViewController {
     
     private func setupBindings() {
         viewModel?.albumDetails.bind { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.collectionView.reloadData()
-            }
+            self?.collectionView.reloadData()
         }
     }
 }
