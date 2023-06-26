@@ -10,7 +10,9 @@ import Foundation
 class Observable<T> {
     var value: T {
         didSet {
-            listener?(value)
+            DispatchQueue.main.async { [unowned self] in
+                self.listener?(self.value)
+            }
         }
     }
     private var listener: ((T) -> Void)?

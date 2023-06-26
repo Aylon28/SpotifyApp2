@@ -41,9 +41,7 @@ class SearchViewController: UIViewController {
     
     private func setupBindings() {
         viewModel.categories.bind { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.collectionView.reloadData()
-            }
+            self?.collectionView.reloadData()
         }
     }
     

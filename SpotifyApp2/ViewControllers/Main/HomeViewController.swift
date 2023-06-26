@@ -42,10 +42,8 @@ class HomeViewController: UIViewController {
     }
     
     private func setupBindings() {
-        viewModel.sections.bind { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.collectionView.reloadData()
-            }
+        viewModel.sections.bind { [unowned self] _ in
+            self.collectionView.reloadData()
         }
     }
     

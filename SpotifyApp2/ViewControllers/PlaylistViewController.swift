@@ -74,9 +74,7 @@ class PlaylistViewController: UIViewController {
     
     private func setupBindings() {
         viewModel?.playlistDetails.bind { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.collectionView.reloadData()
-            }
+            self?.collectionView.reloadData()
         }
     }
 
