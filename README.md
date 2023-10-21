@@ -1,5 +1,5 @@
 # SpotifyApp2
-Spotify-Demo project
+Spotify-Demo project!
 
 ## Demo Spotify application written using Spotify API and UIKit. MVVM.
 
